@@ -1,7 +1,7 @@
 services:
   db:
     image: mongo:latest
-    container_name: mern_mongo_db
+    container_name: webc_mongo_db
     restart: unless-stopped
     environment:
             - MONGO_INITDB_ROOT_USERNAME=admin
