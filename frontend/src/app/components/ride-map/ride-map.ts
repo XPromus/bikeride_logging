@@ -13,6 +13,7 @@ export class RideMapComponent implements AfterViewInit, OnDestroy {
     private platformId = inject(PLATFORM_ID);
     private map: L.Map | null = null;
     private mapReady = false;
+    private polyline: L.Polyline | null = null;
 
     rideId = input.required<string>();
 
@@ -51,13 +52,16 @@ export class RideMapComponent implements AfterViewInit, OnDestroy {
     ) {
         if (!this.map) return;
 
+        this.polyline?.remove();
+        this.polyline = null;
+
         try {
             const points: TrackPoint[] = await getRidePoints(id);
             if (!points.length || !this.map) return;
 
             const coords: L.LatLngExpression[] = points.map(p => [p.latitude, p.longitude]);
-            const polyline = L.polyline(coords, { color: "#818CF8", weight: 3 }).addTo(this.map);
-            this.map.fitBounds(polyline.getBounds(), { padding: [20, 20] });
+            this.polyline = L.polyline(coords, { color: "#818CF8", weight: 3 }).addTo(this.map);
+            this.map.fitBounds(this.polyline.getBounds(), { padding: [20, 20] });
         } catch (e) {
             console.error("Failed to load route", e);
         }

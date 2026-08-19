@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { GpxService } from './gpx.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiResponse } from '@nestjs/swagger';
@@ -44,6 +44,13 @@ export class GpxController {
     ): Promise<RideGetDto> {
         const ride = this.gpxService.parseFile(file);
         return ride;
+    }
+
+    @Delete(":id")
+    async deleteRide(
+        @Param(":id") id: string
+    ) {
+        await this.gpxService.deleteRide(id)
     }
 
 }

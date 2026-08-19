@@ -26,6 +26,7 @@ export class RideListComponent implements OnInit {
     async loadRides() {
         this.loading.set(true);
         this.error.set(null);
+
         try {
             const data = await getRides();
             this.rides.set(data);

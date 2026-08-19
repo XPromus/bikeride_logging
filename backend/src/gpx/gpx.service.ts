@@ -119,6 +119,10 @@ export class GpxService {
         return this.rideModel.find().select("-rawGpx -points").exec();
     }
 
+    async deleteRide(id: string) {
+        await this.rideModel.deleteOne({ id });
+    }
+
     async getRidePoints(id: string): Promise<TrackPoint[]> {
         const ride = await this.rideModel.findById(id).exec();
         if (!ride) {

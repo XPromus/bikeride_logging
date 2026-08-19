@@ -6,7 +6,7 @@
   </div>
   @if (selectedRide() !== null) {
     <div class="basis-2/3 h-full">
-      <ride-display [ride]="selectedRide()!" />
+      <ride-display (rideDeleted)="rideList.loadRides()" [ride]="selectedRide()!" />
     </div> 
   }
 </main>
