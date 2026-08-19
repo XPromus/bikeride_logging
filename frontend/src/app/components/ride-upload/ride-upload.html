@@ -1,6 +1,10 @@
 <div class="flex flex-col space-y-5">
     <label class="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer bg-background-secondary hover:bg-background-tertiary transition-all duration-200">
-        <span>Select GPX file</span>
+        @if (selectedFile() !== null) {
+            <span>{{ selectedFile()!.name }}</span>
+        } @else {
+            <span>Select GPX file</span>
+        }
         <input type="file" accept=".gpx" (change)="onFileSelected($event)" class="hidden" />
     </label>
 

@@ -1,4 +1,15 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    container_name: frontend
+    depends_on:
+      - backend
+    networks:
+      - app_network
+    ports:
+      - "80:80"
   backend:
     build:
       context: ./backend

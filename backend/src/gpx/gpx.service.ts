@@ -116,7 +116,7 @@ export class GpxService {
     }
 
     async getRides(): Promise<RideGetDto[]> {
-        return this.rideModel.find().select("-rawGpx -points").exec();
+        return this.rideModel.find().select("-rawGpx -points").sort({ date: -1 }).exec();
     }
 
     async deleteRide(id: string) {

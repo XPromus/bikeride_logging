@@ -8,12 +8,12 @@
             @if (selectedRide() !== null && ride._id === selectedRide()?._id) {
                 <div (click)="onRideClick(ride)" class="border-2 rounded-lg p-4 bg-accent/50 transition-all duration-200 border-text-primary text-text-primary">
                     <h2 class="font-bold">{{ ride.name }}</h2>
-                    <p>{{ formatDate(ride.date) }} - {{ ride.distance / 1000 }}km - {{ ride.avgSpeed }}km/h</p>
+                    <p>{{ formatDate(ride.date) }} - {{ (ride.distance / 1000).toFixed(2) }}km - {{ ride.avgSpeed }}km/h</p>
                 </div>
             } @else {
                 <div (click)="onRideClick(ride)" class="border-2 rounded-lg p-4 bg-background-secondary hover:bg-background-tertiary hover:cursor-pointer transition-all duration-200 border-text-primary text-text-primary">
                     <h2 class="font-bold">{{ ride.name }}</h2>
-                    <p>{{ formatDate(ride.date) }} - {{ ride.distance / 1000 }}km - {{ ride.avgSpeed }}km/h</p>
+                    <p>{{ formatDate(ride.date) }} - {{ (ride.distance / 1000).toFixed(2) }}km - {{ ride.avgSpeed }}km/h</p>
                 </div>
             }
         }
