@@ -7,3 +7,10 @@ export type RideGetDto = {
     avgSpeed: number,
     __v: number,
 }
+
+export type TrackPoint = {
+    latitude: number,
+    longitude: number,
+    elevation: number,
+    time?: number,
+}

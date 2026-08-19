@@ -1,0 +1,30 @@
+<div class="w-full h-full flex flex-col space-y-5 border-2 border-text-primary rounded-lg p-5">
+    @if (ride() === null) {
+        <span>No ride selected</span>
+    } @else {
+        <div class="flex flex-col">
+            <span class="text-3xl font-bold text-success">{{ ride()!.name }}</span>
+            <span class="text-xl font-light text-text-secondary">{{ formatDate(ride()!.date) }}</span>
+        </div>
+        <div class="flex flex-col">
+            <div class="flex flex-row space-x-2">
+                <span class="font-bold">Distance:</span>
+                <span>{{ (ride()!.distance / 1000).toFixed(2) }} km</span>
+            </div>
+            <div class="flex flex-row space-x-2">
+                <span class="font-bold">Avg Speed:</span>
+                <span>{{ (ride()!.avgSpeed) }} km/h</span>
+            </div>
+            <div class="flex flex-row space-x-2">
+                <span class="font-bold">Elevation:</span>
+                <span>{{ (ride()!.elevation) }} m</span>
+            </div>
+        </div>
+        <ride-map [rideId]="ride()!._id" />
+        <div class="flex flex-row space-x-5">
+            <button (click)="onDeleteRide()" class="p-2 bg-warning hover:bg-warning/50 hover:cursor-pointer rounded-lg transition-all duration-200 text-background-primary">
+                Delete
+            </button>
+        </div>
+    }
+</div>

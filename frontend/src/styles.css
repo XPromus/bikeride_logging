@@ -1,3 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+@import "leaflet/dist/leaflet.css";
+
+:root {
+    --primary-background-color: #0F172A;
+    --secondary-background-color: #1E293B;
+    --tertiary-background-color: #334155;
+    --primary-text-color: #F1F5F9;
+    --secondary-text-color: #94A3B8;
+    --accent-color: #818CF8;
+    --success-color: #4ADE80;
+    --warning-color: #FBBF24;
+}
+
+@theme inline {
+    --color-background-primary: var(--primary-background-color);
+    --color-background-secondary: var(--secondary-background-color);
+    --color-background-tertiary: var(--tertiary-background-color);
+    --color-text-primary: var(--primary-text-color);
+    --color-text-secondary: var(--secondary-text-color);
+    --color-accent: var(--accent-color);
+    --color-success: var(--success-color);
+    --color-warning: var(--warning-color);
+}

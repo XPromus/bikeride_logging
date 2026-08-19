@@ -1,15 +1,23 @@
-import { Component, OnInit, signal } from "@angular/core";
-import { getRides } from "../../api/ride.api";
-import { RideGetDto } from "../../types/ride.types";
+import { Component, EventEmitter, OnInit, Output, signal } from "@angular/core";
+import { getRides } from "../../../api/ride.api";
+import { RideGetDto } from "../../../types/ride.types";
 
 @Component({
-    selector: "ride",
-    templateUrl: './ride.html'
+    selector: "ride-list",
+    templateUrl: './ride-list.html'
 })
-export class RideComponent implements OnInit {
+export class RideListComponent implements OnInit {
     rides = signal<RideGetDto[]>([]);
     loading = signal(true);
     error = signal<string | null>(null);
+
+    @Output() rideSelected = new EventEmitter<RideGetDto>();
+    selectedRide = signal<RideGetDto | null>(null);
+
+    onRideClick(ride: RideGetDto) {
+        this.rideSelected.emit(ride);
+        this.selectedRide.set(ride);
+    }
 
     formatDate(date: string): string {
         return new Date(date).toLocaleDateString();

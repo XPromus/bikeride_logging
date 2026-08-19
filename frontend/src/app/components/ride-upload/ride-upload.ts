@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, signal } from "@angular/core";
-import { RideGetDto } from "../../types/ride.types";
-import { uploadRide } from "../../api/ride.api";
+import { RideGetDto } from "../../../types/ride.types";
+import { uploadRide } from "../../../api/ride.api";
 
 @Component({
     selector: "ride-upload",
@@ -9,15 +9,14 @@ import { uploadRide } from "../../api/ride.api";
 export class RideUploadComponent {
     @Output() rideUploaded = new EventEmitter<void>();
 
+    selectedFile = signal<File | null>(null);
+
     uploading = signal(false);
     uploadedRide = signal<RideGetDto | null>(null);
     error = signal<string | null>(null);
 
-    async onFileSelected(
-        event: Event
-    ) {
-        const input = event.target as HTMLInputElement;
-        const file = input.files?.[0];
+    async onFileUpload() {
+        const file = this.selectedFile();
         if (!file) return;
 
         this.uploading.set(true);
@@ -32,7 +31,16 @@ export class RideUploadComponent {
             this.error.set("Upload failed");
         } finally {
             this.uploading.set(false);
-            input.value = "";
         }
+    }
+
+    async onFileSelected(
+        event: Event
+    ) {
+        const input = event.target as HTMLInputElement;
+        const file = input.files?.[0];
+        if (!file) return;
+
+        this.selectedFile.set(file);
     }
 }

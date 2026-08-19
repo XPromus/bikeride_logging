@@ -1,9 +1,16 @@
-import { RideGetDto } from "../types/ride.types"
+import { RideGetDto, TrackPoint } from "../types/ride.types"
 import { getRequest, uploadRequest } from "./generic.api"
 
 export const getRides = async (): Promise<RideGetDto[]> => {
     const url: string = "http://localhost:3000/gpx";
     return await getRequest<RideGetDto[]>(url, undefined);
+}
+
+export const getRidePoints = async (
+    id: string
+): Promise<TrackPoint[]> => {
+    const url: string = `http://localhost:3000/gpx/points/${id}`
+    return await getRequest<TrackPoint[]>(url, undefined);
 }
 
 export const uploadRide = async (file: File): Promise<RideGetDto> => {
