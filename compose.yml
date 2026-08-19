@@ -1,4 +1,16 @@
 services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: backend
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+    ports:
+      - "3000:3000"
   db:
     image: mongo:latest
     container_name: webc_mongo_db
@@ -6,5 +18,15 @@ services:
     environment:
             - MONGO_INITDB_ROOT_USERNAME=admin
             - MONGO_INITDB_ROOT_PASSWORD=admin
+    healthcheck:
+      test: ["CMD", "mongosh", "-u", "admin", "-p", "admin", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     ports:
       - "27017:27017"
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
