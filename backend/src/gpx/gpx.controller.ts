@@ -12,8 +12,8 @@ export class GpxController {
     constructor(private readonly gpxService: GpxService) {}
 
     @Get()
-    getTest(): string {
-        return this.gpxService.getTest();
+    async getTest(): Promise<RideGetDto[]> {
+        return this.gpxService.getRides();
     }
 
     @Get(":id")

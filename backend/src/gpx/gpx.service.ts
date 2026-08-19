@@ -4,7 +4,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Ride, RideDocument, TrackPoint } from "src/schemas/ride.schema";
 import { XMLParser } from "fast-xml-parser";
-import { NotFoundError } from "rxjs";
 import { RideGetDto } from "src/schemas/ride.get.dto";
 
 const parser = new XMLParser({
@@ -117,7 +116,7 @@ export class GpxService {
     }
 
     async getRides(): Promise<RideGetDto[]> {
-        return this.rideModel.find().select("-rawGpx").exec();
+        return this.rideModel.find().select("-rawGpx -points").exec();
     }
 
     async getRidePoints(id: string): Promise<TrackPoint[]> {

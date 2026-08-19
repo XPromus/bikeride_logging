@@ -1,0 +1,12 @@
+<div class="flex flex-col space-y-4">
+    <label class="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:bg-gray-50">
+        <span>Select GPX file</span>
+        <input type="file" accept=".gpx" (change)="onFileSelected($event)" class="hidden" />
+    </label>
+
+    @if (uploading()) {
+        <span>Uploading...</span>
+    } @else if (error()) {
+        <span class="text-red-500">{{ error() }}</span>
+    }
+</div>
